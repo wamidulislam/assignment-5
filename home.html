@@ -1,13 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- title and favicon -->
     <title>Home Page</title>
-    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
-</head>
-<body>
-    <h1>Hello </h1>
-</body>
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- daisy ui and tailwind css -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- connect css stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="bg-[#F8FAFC] w-100%">
+    <!-- Nav section -->
+    <section class="shadow bg-white">
+      <div class="navbar flex justify-between md:px-20">
+        <!-- Left side -->
+        <div class="flex justify-center items-center gap-2">
+          <div>
+            <img class="w-5" src="./assets/github-logo.png" alt="" />
+          </div>
+          <div>
+            <p class="text-[10px] md:text-[18px] md:font-bold">
+              GitHub Issues Tracker
+            </p>
+          </div>
+        </div>
+        <!-- right side -->
+        <div class="flex gap-3">
+          <div class="search">
+            <label class="input">
+              <svg
+                class="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input type="search" required placeholder="Search" />
+            </label>
+          </div>
+          <div>
+            <button class="btn btn-primary">
+              <span><i class="fa-solid fa-plus"></i></span>
+              New Issues
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- All Open Close Button section -->
+    <section class="md:px-40 py-5 flex gap-3">
+      <div>
+        <button class="lg:w-[120px] h-40px btn btn btn-primary">All</button>
+      </div>
+      <div>
+        <button class="lg:w-[120px] h-40px btn-outline btn btn-success">
+          Open
+        </button>
+      </div>
+      <div>
+        <button class="lg:w-[120px] h-40px btn-outline btn btn-error">
+          Closed
+        </button>
+      </div>
+    </section>
+
+    <!-- Main section with text and all card -->
+    <main class=" sm:px-2 md:px-10 lg:px-40">
+      <!-- text -->
+      <div
+        class="bg-white border border-amber-50 shadow-2xl rounded-xl flex justify-between items-center"
+      >
+        <!-- left -->
+        <div class="flex items-center p-4 gap-3">
+          <div>
+            <i class="fa-solid fa-box-tissue" style="color: rgb(74, 0, 255);"></i>
+          </div>
+          <div>
+            <p class="text-xl">50 Issues</p>
+            <p class="text-[#64748B]">Track and manage your project issues</p>
+          </div>
+        </div>
+        <!-- right -->
+        <div class="flex gap-10 p-2">
+          <div class="flex justify-center items-center gap-1">
+            <span
+              ><i class="fa-solid fa-circle" style="color: rgb(0, 169, 110)"></i
+            ></span>
+            <p>Open</p>
+          </div>
+          <div class="flex justify-center items-center gap-1">
+            <span
+              ><i
+                class="fa-solid fa-circle"
+                style="color: rgb(168, 85, 247)"
+              ></i
+            ></span>
+            <p>Closed</p>
+          </div>
+        </div>
+      </div>
+      <!-- cards -->
+      <div id="card">
+        
+      </div>
+    </main>
+  </body>
 </html>
