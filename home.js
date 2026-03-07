@@ -1,27 +1,61 @@
 // card counting dynamically
 const card = document.getElementById("cardCount");
+const spinner  = document.getElementById("loadingSpin")
+
+
+// modal
+// {
+// "status": "success",
+// "message": "Issue fetched successfully",
+// "data": {
+// "id": 8,
+// "title": "Database migration fails on production",
+// "description": "The latest migration script fails when running on production database. Works fine locally.",
+// "status": "open",
+// "labels": [
+// "bug"
+// ],
+// "priority": "high",
+// "author": "db_admin",
+// "assignee": "alex_perf",
+// "createdAt": "2024-01-21T08:45:00Z",
+// "updatedAt": "2024-01-21T08:45:00Z"
+// }
+// }
+
+// get element modal
+const modal = document.getElementById("card_details")
+
+
+
+
+
 
 
 
 // get the element
 const cardContainer = document.getElementById("cards")
 
+// Loading spinner
+async function showSpinner() {
+    spinner.classList.remove("hidden");
+    spinner.classList.add("flex")
+}
+
+async function hideSpinner() {
+    spinner.classList.add("hidden");
+}
+
+
 let allCards = [];
 async function loadCards() {
+  showSpinner()
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     const data = await res.json();
     allCards = (data.data);
     displayCards(allCards)
-    
+    hideSpinner()
 }
-
-// load single issues
-async function loadIssue() {
-  const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}")
-  const data = await res.json();
-  
-}
-loadIssue()
 
 function displayCards(cards){
     cardContainer.innerHTML = "";
@@ -58,7 +92,7 @@ function displayCards(cards){
      
      const createCard = document.createElement("div")
      createCard.innerHTML = `
-        <div class="card w-[310px] h-[400px] bg-base-100 shadow-xl ${border} 
+        <div onclick = "openModal()" class="card w-[310px] h-[400px] bg-base-100 shadow-xl ${border} 
         ">
           <div class="card-body">
             <div class="card nav grid grid-cols-2">
@@ -106,22 +140,40 @@ function displayCards(cards){
         </div>
      `
      cardContainer.appendChild(createCard)
-
     })
 }
-loadCards();
 // Button events
-document.getElementById("allBtn").addEventListener("click", function(){
+ async function buttonClick(){
+  document.getElementById("allBtn").addEventListener("click", function(){
+  showSpinner();
   displayCards(allCards)
+  hideSpinner();
 })
-document.getElementById("openBtn").addEventListener("click", function(){
-  const openCards = allCards.filter(card => card.status === "open");
-  displayCards(openCards)
-})
+document.getElementById("openBtn").addEventListener("click", () => {
+    showSpinner();
+        const openCards = allCards.filter(card => card.status === "open");
+        displayCards(openCards);
+        hideSpinner();
+    })
 document.getElementById("closeBtn").addEventListener("click",function (){
+  showSpinner();
   const closeCards = allCards.filter(card => card.status === "closed");
-  displayCards(closeCards)
+   displayCards(closeCards)
+   hideSpinner();
 })
+ }
+  // modal function
+ async function openModal(card){
+  const res =await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/${card.data.id}")
+  const data =await res.json();
+  console.log(data)
+  card_details.showModal()
+ }
+
+ loadCards();
+  buttonClick();
+
+
 // button color
 const colorBtn = (status) => {
   const allBtn = document.getElementById("allBtn")
