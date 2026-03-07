@@ -2,6 +2,7 @@
 const card = document.getElementById("cardCount");
 
 
+
 // get the element
 const cardContainer = document.getElementById("cards")
 
@@ -17,15 +18,43 @@ function displayCards(cards){
     card.innerText = cards.length
     // loop
     cards.forEach((card)=>{
+      // change border color
+      let border = '';
+      if(card.status === "open"){
+        border = 'border-t-3 border-t-green-500'}
+        else{
+          border = 'border-t-3 border-t-purple-500'
+        }
+        // change icon img
+        let icon = '';
+        if(card.status === "open"){
+        icon = '<img src="./assets/Open-Status.png" alt="" />'}
+        else{
+          icon = '<img src="./assets/Closed- Status .png" alt="">'
+        }
+
+        // change status color
+        let priority = '';
+        if(card.priority === "high"){
+          priority = 'bg-[#FEECEC] text-[#EF4444] text-center rounded-full'}
+        else if (card.priority === "medium") {
+          priority = 'bg-[#FFF6D1] text-[#F59E0B] text-center rounded-full'   
+        } 
+        else {
+          priority = 'bg-[#EEEFF2] text-[#9CA3AF] text-center rounded-full'
+        }
+       
+     
      const createCard = document.createElement("div")
      createCard.innerHTML = `
-        <div class="card w-[310px] h-[400px] bg-base-100 shadow-xl border-t-3 border-t-[#00A96E] ">
+        <div class="card w-[310px] h-[400px] bg-base-100 shadow-xl ${border} 
+        ">
           <div class="card-body">
             <div class="card nav grid grid-cols-2">
               <div>
-                <img src="./assets/Open-Status.png" alt="" />
+                ${icon}
               </div>
-              <div class="bg-[#FEECEC] text-center rounded-full">
+              <div class = "${priority}">
                 <p>${card.priority}</p>
               </div>
             </div>
