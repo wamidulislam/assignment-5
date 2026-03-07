@@ -6,14 +6,25 @@ const card = document.getElementById("cardCount");
 // get the element
 const cardContainer = document.getElementById("cards")
 
+let allCards = [];
 async function loadCards() {
-    const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues ")
+    const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     const data = await res.json();
-    displayCards(data.data);
+    allCards = (data.data);
+    displayCards(allCards)
     
 }
 
+// load single issues
+async function loadIssue() {
+  const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}")
+  const data = await res.json();
+  
+}
+loadIssue()
+
 function displayCards(cards){
+    cardContainer.innerHTML = "";
     // card count
     card.innerText = cards.length
     // loop
@@ -95,6 +106,41 @@ function displayCards(cards){
         </div>
      `
      cardContainer.appendChild(createCard)
+
     })
 }
 loadCards();
+// Button events
+document.getElementById("allBtn").addEventListener("click", function(){
+  displayCards(allCards)
+})
+document.getElementById("openBtn").addEventListener("click", function(){
+  const openCards = allCards.filter(card => card.status === "open");
+  displayCards(openCards)
+})
+document.getElementById("closeBtn").addEventListener("click",function (){
+  const closeCards = allCards.filter(card => card.status === "closed");
+  displayCards(closeCards)
+})
+// button color
+const colorBtn = (status) => {
+  const allBtn = document.getElementById("allBtn")
+  const openBtn = document.getElementById("openBtn")
+  const closeBtn = document.getElementById("closeBtn")
+  if(status === "all"){
+    allBtn.classList.add("btn-primary")
+    openBtn.classList.remove("btn-primary")
+    closeBtn.classList.remove("btn-primary")
+  }
+  else if(status === "open"){
+    allBtn.classList.remove("btn-primary")
+    openBtn.classList.add("btn-primary")
+    closeBtn.classList.remove("btn-primary")
+  }
+  else{
+    allBtn.classList.remove("btn-primary")
+    openBtn.classList.remove("btn-primary")
+    closeBtn.classList.add("btn-primary")
+  }
+
+}
