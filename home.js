@@ -25,10 +25,15 @@ const spinner  = document.getElementById("loadingSpin")
 
 // get element modal
 const modal = document.getElementById("card_details")
-
-
-
-
+const modalTitle = document.getElementById("cardTitle")
+const cardStatus = document.getElementById("cardStatus")
+const cardOpener = document.getElementById("cardOpener")
+const openDate = document.getElementById("openDate")
+const cardBug = document.getElementById("cardBug")
+const cardHelp = document.getElementById("cardHelp")
+const description = document.getElementById("description")
+const person = document.getElementById("person")
+const cardPriority = document.getElementById("cardPriority")
 
 
 
@@ -92,7 +97,8 @@ function displayCards(cards){
      
      const createCard = document.createElement("div")
      createCard.innerHTML = `
-        <div onclick = "openModal()" class="card w-[310px] h-[400px] bg-base-100 shadow-xl ${border} 
+        <div onclick="openModal(${card.id})" class="card w-[310px] h-[400px] bg-base-100 shadow-xl 
+        ${border} 
         ">
           <div class="card-body">
             <div class="card nav grid grid-cols-2">
@@ -163,12 +169,25 @@ document.getElementById("closeBtn").addEventListener("click",function (){
 })
  }
   // modal function
- async function openModal(card){
-  const res =await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/${card.data.id}")
-  const data =await res.json();
-  console.log(data)
-  card_details.showModal()
- }
+ async function openModal(cardId){
+  // Fetch single card data from API using the id
+  const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${cardId}`);
+  const data = await res.json();
+  const issue = data.data;
+
+  // change inner text
+  modalTitle.innerText = issue.title;
+  cardStatus.innerText = issue.status;
+  cardOpener.innerText = "Opened by " + issue.assignee;
+  openDate.innerText = issue.createdAt;
+  description.innerText = issue.description;
+  person.innerText = issue.assignee || "No information";
+  cardPriority.innerText = issue.priority;
+  cardBug.innerText = issue.labels[0];
+  cardHelp.innerText = issue.labels[1];
+
+  modal.showModal();
+}
 
  loadCards();
   buttonClick();

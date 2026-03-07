@@ -143,49 +143,49 @@
          <div class="w-[636px]">
             <dialog id="card_details" class="modal">
               <div class="modal-box w-11/12 max-w-5xl">
-                <h2 class="text-xl font-bold">Hello!</h2>
+                <h2 id="cardTitle" class="text-xl font-bold">Hello!</h2>
                 <div class="flex gap-3 items-center">
                   <div>
-                    <p class="bg-[#00A96E] rounded-xl text-white p-1 text-center">
+                    <p id="cardStatus" class="bg-[#00A96E] rounded-xl text-white p-1 text-center">
                       Opened</p>
                   </div>
                   <div>
-                    <p class="text-[#64748B]"><span>.</span>Opened by</p>
+                    <p id="cardOpener" class="text-[#64748B]"><span>.</span>Opened by</p>
                   </div>
                   <div>
-                    <p class="text-[#64748B]"><span>.</span>Date</p>
+                    <p id="openDate" class="text-[#64748B]"><span>.</span>Date</p>
                   </div>
                 </div>
                 <div class="flex gap-4 mt-3">
                   <div class="bug">
                      <p
-                class="bg-[#FEECEC] border border-[#FECACA] text-[#EF4444] text-center rounded-full">
+                 id="cardBug" class="bg-[#FEECEC] border border-[#FECACA] text-[#EF4444] text-center rounded-full">
                 <i class="fa-solid fa-bug" style="color: rgb(239, 68, 68)"></i >
                   Bug
               </p>
                   </div>
                   <div class="help">
-                    <p class="bg-[#FFF8DB] border border-[#FDE68A] text-[#D97706] text-center rounded-full">
+                    <p id="cardHelp" class="bg-[#FFF8DB] border border-[#FDE68A] text-[#D97706] text-center rounded-full">
                 <i class="fa-solid fa-life-ring" style="color: rgb(217, 119, 6)"></i>
                       help
               </p>
                     </div>
                 </div>
-                <p class="mt-3 text-[#64748B]">description</p>
+                <p id="description" class="mt-3 text-[#64748B]">description</p>
                <div class="mt-3 flex justify-between bg-base-200 rounded-md p-3">
                  <div>
                   <p>assignee</p>
-                  <p class="mt-2">Name</p>
+                  <p id="person" class="mt-2">Name</p>
                 </div>
                 <div class="text-center">
-                  <p>Priority</p>
-                  <p class="bg-black text-white text-center rounded-full mt-2">High</p>
+                  <p >Priority</p>
+                  <p id="cardPriority" class="bg-black text-white text-center rounded-full mt-2">High</p>
                 </div>
                </div>
                 <div class="modal-action">
                   <form method="dialog">
                     <!-- if there is a button, it will close the modal -->
-                    <button class="btn" onclick="document.getElementById('ard_details')">Close</button>
+                   <button class="btn" onclick="document.getElementById('card_details').close()">Close</button>
                   </form>
                 </div>
               </div>
