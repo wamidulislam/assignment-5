@@ -118,7 +118,7 @@ function displayCards(cards){
                 <p class="text-[#64748B]">${card.createdAt}</p>
             </div>
             <div class = "flex justify-between items-center gap-10">
-                <p class="text-[#64748B]">${card.assignee || "Not Found"}</p>
+                <p class="text-[#64748B]">${card.assignee || "Unassigned"}</p>
                 <p class="text-[#64748B]">${card.updatedAt}</p>
             </div>
             
