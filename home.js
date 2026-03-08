@@ -3,26 +3,6 @@ const card = document.getElementById("cardCount");
 const spinner  = document.getElementById("loadingSpin")
 
 
-// modal
-// {
-// "status": "success",
-// "message": "Issue fetched successfully",
-// "data": {
-// "id": 8,
-// "title": "Database migration fails on production",
-// "description": "The latest migration script fails when running on production database. Works fine locally.",
-// "status": "open",
-// "labels": [
-// "bug"
-// ],
-// "priority": "high",
-// "author": "db_admin",
-// "assignee": "alex_perf",
-// "createdAt": "2024-01-21T08:45:00Z",
-// "updatedAt": "2024-01-21T08:45:00Z"
-// }
-// }
-
 // get element modal
 const modal = document.getElementById("card_details")
 const modalTitle = document.getElementById("cardTitle")
@@ -215,3 +195,23 @@ const colorBtn = (status) => {
   }
 
 }
+
+
+
+// search implement based on title
+document.getElementById("btn-search").addEventListener('click', ()=> {
+  const input = document.getElementById("input-search");
+  const searchValue = input.value.trim().toLowerCase();
+  console.log(searchValue)
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+  .then((res) => res.json())
+  .then((data) => {
+    const allSearch = data.data;
+    const filterSearch = allSearch.filter(search => search.title.toLowerCase().
+    includes(searchValue));
+    console.log(filterSearch);
+    displayCards(filterSearch)
+  });
+
+
+})
